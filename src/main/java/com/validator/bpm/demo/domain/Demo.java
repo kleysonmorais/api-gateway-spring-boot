@@ -1,4 +1,4 @@
-package com.validator.bpm.demo;
+package com.validator.bpm.demo.domain;
 
 import java.util.Objects;
 
