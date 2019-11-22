@@ -1,8 +1,6 @@
 package com.validator.bpm.demo.service;
 
 import com.validator.bpm.demo.dto.DeficientDto;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

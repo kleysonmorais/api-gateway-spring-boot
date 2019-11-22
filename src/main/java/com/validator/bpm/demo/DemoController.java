@@ -3,12 +3,9 @@ package com.validator.bpm.demo;
 import com.validator.bpm.demo.dto.DeficientDto;
 import com.validator.bpm.demo.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,18 +15,6 @@ public class DemoController {
 
     @Autowired
     DemoService demoService;
-
-    @GetMapping("/hello-world")
-    public ResponseEntity<ArrayList<Demo>> demo(@RequestHeader HttpHeaders headers, HttpServletRequest request) {
-        InetSocketAddress host = headers.getHost();
-        String header = request.getHeader("Authorization");
-        String authToken = "sem_token";
-        if (header != null && header.startsWith("Bearer ")) authToken = header.substring(7);
-        String url = "http://" + host.getHostName() + ":" + host.getPort() + "/api/hello-world";
-        ArrayList<Demo> arrayList = new ArrayList<>();
-        arrayList.add(new Demo(url, authToken));
-        return ResponseEntity.ok(arrayList);
-    }
 
     @GetMapping("/deficient-all-authorization")
     public ResponseEntity deficientAllAuthorization(HttpServletRequest request) {
