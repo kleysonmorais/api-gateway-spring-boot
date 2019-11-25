@@ -1,10 +1,13 @@
 package br.com.senior.gateway.service;
 
+import br.com.senior.gateway.exception.RequestException;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class GatewayService {
@@ -18,10 +21,11 @@ public class GatewayService {
     return response.getBody();
   }
 
-  public String getToken(HttpServletRequest request) throws Exception {
-    String header = request.getHeader("Authorization");
-    if (header != null && header.startsWith("Bearer ")) return header.substring(7);
-    else throw new Exception("É obrigatório informar o token para autenticação");
+  public String getToken(HttpServletRequest request) {
+    Optional<String> header = Optional.ofNullable(request.getHeader("Authorization"));
+
+    if (header.isPresent() && header.get().startsWith("Bearer ")) return header.get().substring(7);
+    else throw new RequestException("É obrigatório informar o token para autenticação");
   }
 
   public String buildParams(Map<String, String> params) {
