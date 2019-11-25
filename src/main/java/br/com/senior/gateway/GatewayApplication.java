@@ -1,4 +1,4 @@
-package com.validator.bpm.demo;
+package br.com.senior.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,15 +13,15 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @SpringBootApplication
-public class DemoApplication extends SpringBootServletInitializer {
+public class GatewayApplication extends SpringBootServletInitializer {
 
   public static void main(String[] args) {
-    SpringApplication.run(DemoApplication.class, args);
+    SpringApplication.run(GatewayApplication.class, args);
   }
 
   @Override
   protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-    return application.sources(DemoApplication.class);
+    return application.sources(GatewayApplication.class);
   }
 
   @Bean

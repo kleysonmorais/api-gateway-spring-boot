@@ -1,10 +1,10 @@
-package com.validator.bpm.demo;
+package br.com.senior.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class GatewayApplicationTests {
 
 	@Test
 	void contextLoads() {

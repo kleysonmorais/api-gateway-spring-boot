@@ -1,4 +1,4 @@
-package com.validator.bpm.demo.service;
+package br.com.senior.gateway.service;
 
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Service
-public class DemoService {
+public class GatewayService {
 
   public Object execute(String url, String token, String method, String body) {
     RestTemplate restTemplate = new RestTemplate();

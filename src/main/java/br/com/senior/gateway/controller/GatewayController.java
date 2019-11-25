@@ -1,6 +1,6 @@
-package com.validator.bpm.demo.controller;
+package br.com.senior.gateway.controller;
 
-import com.validator.bpm.demo.service.DemoService;
+import br.com.senior.gateway.service.GatewayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +10,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/gateway")
-public class DemoController {
+public class GatewayController {
 
-  @Autowired DemoService demoService;
+  @Autowired
+  GatewayService gatewayService;
 
   @RequestMapping(
       value = "/request-generic",
@@ -26,9 +27,9 @@ public class DemoController {
     if (url != null) params.remove("url");
     else throw new Exception("O parâmetro 'url' é obrigatório e não está presente");
     return ResponseEntity.ok(
-        demoService.execute(
-            url.concat(demoService.buildParams(params)),
-            demoService.getToken(request),
+        gatewayService.execute(
+            url.concat(gatewayService.buildParams(params)),
+            gatewayService.getToken(request),
             request.getMethod(),
             body));
   }
