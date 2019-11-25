@@ -1,6 +1,7 @@
 package br.com.senior.gateway.service;
 
 import br.com.senior.gateway.exception.RequestException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,8 +13,9 @@ import java.util.Optional;
 @Service
 public class GatewayService {
 
+  @Autowired private RestTemplate restTemplate;
+
   public Object execute(String url, String token, String method, String body) {
-    RestTemplate restTemplate = new RestTemplate();
     HttpHeaders headers = getHeaders(token);
     HttpEntity<String> entity = new HttpEntity<>(body, headers);
     ResponseEntity<Object> response =
