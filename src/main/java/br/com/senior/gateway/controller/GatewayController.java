@@ -33,6 +33,7 @@ public class GatewayController {
     Optional<String> url = Optional.ofNullable(params.get("url"));
     url.orElseThrow(
         () -> new RequestException("O parâmetro 'url' é obrigatório e não está presente"));
+    params.remove("url");
 
     return ResponseEntity.ok(
         gatewayService.execute(
