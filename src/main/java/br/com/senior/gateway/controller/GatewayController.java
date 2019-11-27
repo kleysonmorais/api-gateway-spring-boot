@@ -35,11 +35,10 @@ public class GatewayController {
         () -> new RequestException("O parâmetro 'url' é obrigatório e não está presente"));
     params.remove("url");
 
-    return ResponseEntity.ok(
-        gatewayService.execute(
-            url.get().concat(gatewayService.buildParams(params)),
-            gatewayService.getToken(request),
-            request.getMethod(),
-            body));
+    return gatewayService.execute(
+        url.get().concat(gatewayService.buildParams(params)),
+        gatewayService.getToken(request),
+        request.getMethod(),
+        body);
   }
 }

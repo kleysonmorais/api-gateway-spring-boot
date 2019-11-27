@@ -4,6 +4,7 @@ import br.com.senior.gateway.exception.RequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +16,19 @@ public class GatewayService {
 
   @Autowired private RestTemplate restTemplate;
 
-  public Object execute(String url, String token, String method, String body) {
+  public ResponseEntity<?> execute(String url, String token, String method, String body) {
     HttpHeaders headers = getHeaders(token);
     HttpEntity<String> entity = new HttpEntity<>(body, headers);
-    ResponseEntity<Object> response =
-        restTemplate.exchange(url, HttpMethod.resolve(method), entity, Object.class);
-    return response.getBody();
+    ResponseEntity<Object> response = null;
+    try {
+      response = restTemplate.exchange(url, HttpMethod.resolve(method), entity, Object.class);
+    } catch (HttpStatusCodeException e) {
+      return ResponseEntity.status(e.getRawStatusCode())
+          .headers(e.getResponseHeaders())
+          .body(e.getResponseBodyAsString());
+    }
+
+    return ResponseEntity.ok(response.getBody());
   }
 
   public String getToken(HttpServletRequest request) {
